@@ -198,6 +198,11 @@ def route(
                 )
 
                 response.headers.update(service_headers)
+            if status_code_from_service >= 400:
+                raise HTTPException(
+                    status_code=status_code_from_service,
+                    detail=resp_data
+                )
             response.status_code = status_code_from_service
 
             return resp_data
